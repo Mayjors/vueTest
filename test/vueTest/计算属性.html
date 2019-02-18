@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>计算属性 computed</title>
+    <script src="vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        a={{ a }}, b={{ b }}
+        <h2>{{message}}</h2>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                a:1,
+                title: 'my first lesson'
+            },
+            computed: {
+                b: function () {
+                    return this.a +1
+                },
+                b: {
+                    get: function () {
+                        return this.a +2
+                    }
+                },
+                message: {
+                    // getter
+                    get: function () {
+                        return this.title
+                    },
+                    // setter
+                    set: function (newValue) {
+                        this.title = newValue
+
+                    }
+                }
+            }
+        })
+        vm.a = 8;
+        vm.message = 'my second lesson'
+    </script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="firstName" />
+        <input type="text" v-model="lastName" />
+        <p>我的名字是： {{fullName}}</p>
+        <br>
+        <input type="text" v-model="number" />
+        <p>result: {{result}}</p>
+        <br>
+        <input type="text" v-model="fruits.count" />
+        <input type="text" v-model="fruits.name" />
+        <p>fruits: {{message}}</p>
+    </div>
+    <script>
+        var vue = new Vue({
+            el: '#app',
+            data: {
+                firstName: 'stephen',
+                lastName: 'curry',
+                fullName: 'stephen curry',
+                number: 1,
+                result: 1,
+                fruits: {
+                    name: "香蕉",
+                    count:5
+                },
+                message: "5条香蕉"
+            },
+            watch: {
+                firstName: function (curVal, oldVal) {
+                    this.fullName = curVal + " " + this.lastName
+                },
+                lastName: function (curVal, oldVal) {
+                    this.fullName = this.firstName + " " + this.lastName
+                },
+                number: function (curVal, oldVal) {
+                    this.result = curVal*1 + oldVal*1
+                },
+                fruits: {
+                    handler(obj) {
+                        this.message = obj.count + "条" + obj.name
+                    },
+                    deep: true
+                }
+            }
+        })
+    </script>
+</body>
+</html>

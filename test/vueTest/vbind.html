@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue 第一个实例</title>
+    <script src="vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <p>{{message}}</p>
+        <h2 v-html="message2"></h2>
+        <h2 v-bind:class="value">value</h2><!--<h2 :id="value">value</h2>-->
+        <h2 v-bind:id="vid" :class="vclass" :title="vtitle">vue 多属性绑定</h2>
+        <h2>{{message.toLowerCase()}}</h2>
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                message: 'Hello World!',
+                message2: '<font color="red">这是我的标题</font>',
+                value: "content",
+                vid: "myid",
+                vclass: "mycalss",
+                vtitle: "vue 多属性绑定"
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>Vue 实例</title>
+  <script src="vue.min.js"></script>
+</head>
+<body>
+<div id="app">
+  <m-item></m-item>
+  <div>
+    <input type="text" v-model="todoValue">
+    <button @click="handleBtnClick">提交</button>
+  </div>
+  <ul>
+    <todo-item v-bind:content="item" v-bind:index="index" v-for="(item, index) in list" @delete="handleItemDelete">
+
+    </todo-item>
+  </ul>
+</div>
+<script>
+  // 全局组件
+  Vue.component('m-item', {
+    template: '<div>全局组件</div>'
+  })
+  // 子组件
+  var TodoItem = {
+    props: ['content', 'index'],
+    template: "<li @click='handleDelete'>{{content}}</li>",
+    methods: {
+      handleDelete: function () {
+        this.$emit("delete", this.index)  // 子组件绑定事件,父组件响应
+      }
+    }
+  }
+  // 父组件
+  new Vue({
+    el: '#app',
+    data: {
+      name: 'myapp',
+      list: [],
+      todoValue: ""
+    },
+    components: {
+      TodoItem: TodoItem  // 绑定子组件
+    },
+    methods: {
+      handleBtnClick: function () {
+        this.list.push(this.todoValue)  //嵌入数组
+        this.todoValue = ""
+      },
+      handleItemDelete: function (index) {
+        this.list.splice(index, 1)  // 删除对应index
+      }
+    }
+  })
+</script>
+</body>
+</html>

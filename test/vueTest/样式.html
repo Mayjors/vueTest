@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="vue.min.js"></script>
+    <style>
+        .current{text-decoration: underline}
+        .is_nav{background-color: #2FA4E7}
+        .color{color: gray}
+    </style>
+</head>
+<body>
+    <div id="app">
+        <span class="side" v-bind:class="{current:isCurrent}">当前导航</span>
+        <span class="side" v-bind:class="objClass">当前导航</span>
+        <span class="side" v-bind:class="comClass">当前导航</span>
+    </div>
+    <script>
+        var vue = new Vue({
+            el: "#app",
+            data: {
+                isCurrent: true,
+                objClass: {
+                    'current': true,
+                    'is_nav': false,
+                    'color': true
+                },
+                isColor: true
+            },
+            computed: {
+                comClass: function () {
+                    return {
+                        'color': this.isColor
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>

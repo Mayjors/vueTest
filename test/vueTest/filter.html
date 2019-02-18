@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue 实例</title>
+    <script src="vue.min.js"></script>
+</head>
+<body>
+<div id="app">
+    <h2>{{name | touppercase | myfilter}}</h2>
+</div>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            name: 'myapp'
+        },
+        filters: {
+            myfilter(value) {
+                return value.split('').reverse().join('');
+            },
+            touppercase(value) {
+                return value.toUpperCase();
+            }
+        }
+    })
+</script>
+</body>
+</html>

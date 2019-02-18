@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="vue.min.js"></script>
+</head>
+<body>
+<div id="app">
+    <p v-if="type == 'iphone'">iphone</p>
+    <p v-else-if="type == 'xiaomi'">小米</p>
+    <p v-else-if="type == 'huawei'">华为</p>
+    <p v-else>没有相关数据</p>
+</div>
+<script>
+    var vue = new Vue({
+        el: "#app",
+        data: {
+            type: 'xiaomi'
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="vue.min.js"></script>
+</head>
+<body>
+<div id="app">
+  <child message="hello!"></child>
+  <br>
+  <input v-model="parentMsg">
+  <br>
+  <child v-bind:message="parentMsg"></child>
+  <br>
+  <ol>
+    <todo-item v-for="item in sites" v-bind:todo="item"></todo-item>
+  </ol>
+</div>
+<script>
+  Vue.component('todo-item', {
+    props: ['todo'],
+    template: '<li>{{todo.text}}</li>'
+  })
+  Vue.component('child', {
+    // 声明props
+    props: ['message'],
+    // 同样也可以在vm实例中像this.message 这样使用
+    template: '<span>{{message}}</span>',
+  })
+  var vue = new Vue({
+    el: "#app",
+    data: {
+      parentMsg: '父组件内容',
+      sites: [
+        { text: 'Runoob' },
+        { text: 'Google' },
+        { text: 'Taobao' }
+      ]
+    }
+  })
+</script>
+</body>
+</html>
