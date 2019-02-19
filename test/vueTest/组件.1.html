@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+      <button-counter></button-counter>
+      <br>
+      <blog-post title="My journey with Vue"></blog-post>
+      <blog-post title="Blogging with Vue"></blog-post>
+      <blog-post title="Why Vue is so fun"></blog-post>
+
+      <br>
+      <!-- $emit的使用方法 -->
+      <welcome-button v-on:welcome="sayHi"></welcome-button>
+      <magic-eight-ball v-on:give-advice="showAdvice"></magic-eight-ball>
+    </div>
+    <script>
+      Vue.component('button-counter', {
+        data: function () {
+          return {
+            count : 0
+          }
+        },
+        template: '<button v-on:click="count++">You clicked me {{count}} times.</button>'
+      })
+      Vue.component('blog-post', {
+        props: ['title'],
+        template: '<h3>{{ title }}</h3>'
+      })
+      Vue.component('welcome-button', {
+        template: `
+          <button v-on:click="$emit('welcome')">
+            Click me to be welcomed
+          </button>
+        `
+      })
+      Vue.component('magic-eight-ball', {
+        data: function () {
+          return {
+            possibleAdvice: ['Yes', 'No', 'Maybe']
+          }
+        },
+        methods: {
+          giveAdvice: function () {
+            var randomAdviceIndex = Math.floor(Math.random() * this.possibleAdvice.length)
+            this.$emit('give-advice', this.possibleAdvice[randomAdviceIndex])
+          }
+        },
+        template: `
+          <button v-on:click="giveAdvice">
+            Click me for advice
+          </button>
+        `
+      })
+      var vue = new Vue({
+          el: "#app",
+          data: {
+          },
+          methods: {
+            sayHi: function () {
+              alert("Hi!")
+            },
+            showAdvice: function (advice) {
+              alert(advice)
+            }
+          }
+      })
+    </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="vue.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+  <div id="app">
+
+  </div>
+  <script>
+    var data = {a : 1}
+
+    var vue = new Vue({
+      el: "#app",
+      data: data
+    })
+
+    // 获得这个实例上的属性
+    vue.a == data.a
+
+    // 设置属性也会影响到原始数据
+    vue.a = 2
+    console.log("a", data.a)
+
+    data.a = 3
+    vue.a
+    console.log("vue.a", vue.a)
+  </script>
+</body>
+</html>
